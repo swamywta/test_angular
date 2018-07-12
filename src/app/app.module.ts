@@ -7,13 +7,11 @@ import { HttpModule } from '@angular/http';
 import {HttpClientModule} from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { ClientsComponent } from './clients/clients.component';
-import { EditClientComponent } from './edit-client/edit-client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientsComponent,
-    EditClientComponent
+    ClientsComponent
   ],
   imports: [
     BrowserModule,

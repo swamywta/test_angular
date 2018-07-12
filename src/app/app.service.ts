@@ -18,8 +18,16 @@ export class AppService {
     return this.http.get('http://localhost:3000/clients/get_clients')
       .pipe(map((res:Response) => res.json()));
   }
+  get_client_data(id): Observable<any> {
+    return this.http.get('http://localhost:3000/clients/get_client_data/'+id)
+      .pipe(map((res:Response) => res.json()));
+  }
   create_client(data): Observable<any> {
     return this.http.post('http://localhost:3000/clients/create_client', data)
+      .pipe(map((res:Response) => res.json()));
+  }
+  edit_client(data): Observable<any> {
+    return this.http.post('http://localhost:3000/clients/edit_client', data)
       .pipe(map((res:Response) => res.json()));
   }
 }

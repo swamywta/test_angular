@@ -21,7 +21,7 @@
       <td>{{client.email}}</td>
       <td>{{client.company}}</td>
       <td>{{client.zip}}</td>
-      <td><button class="btn btn-primary">Edit</button> </td>
+      <td><button class="btn btn-primary" [routerLink]="['/clients/edit-client/'+client._id]">Edit</button> </td>
     </tr>
   </tbody>
 </table>
