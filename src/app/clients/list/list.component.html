@@ -2,7 +2,41 @@
 <!-- <h2>
   Clients
 </h2> -->
-<a [routerLink]="['/clients/create-client']">Create Client</a>
+<br>
+<br>
+<form name="form" (ngSubmit)="searchForm.form.valid && onSubmit()" #searchForm="ngForm" novalidate>
+<div class="row">
+  <div class="col-md-2">
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" [(ngModel)]="client_data.name" #name="ngModel" placeholder="Name"   />
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+        <input type="text" class="form-control" name="phone" [(ngModel)]="client_data.phone" #phone="ngModel" placeholder="phone"  />
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+        <input type="text" class="form-control" name="email" [(ngModel)]="client_data.email" #email="ngModel" placeholder="email"  />
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+        <input type="text" class="form-control" name="company" [(ngModel)]="client_data.company" #company="ngModel" placeholder="company"  />
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+        <input type="text" class="form-control" name="zip" [(ngModel)]="client_data.zip" #zip="ngModel" placeholder="zip"  />
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-primary" >Search</button>
+  </div>
+</div>
+</form>
+<a [routerLink]="['/clients/create-client']">Test</a>
 <table class="table table-light table-striped">
   <thead>
     <tr>
