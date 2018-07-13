@@ -2,46 +2,48 @@
 
   <div class="col-md-6 col-md-offset-2">
     <h1>Create Client </h1>
-    <form [formGroup]="createClientForm" (ngSubmit)="createClientForm.valid && onSubmit()" novalidate>
-      <div class="form-group">
+    <form name="createClientForm" [formGroup]="createClientForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group" [ngClass]="{ 'has-danger': submitted && createClientForm.controls.name.errors }">
         <label for="name">Name</label>
-        <input type="text" class="form-control" formControlName="name"  id="name">
-        <div *ngIf="submitted && createClientForm.controls.name.errors" class="error">
+        <input type="text" class="form-control" formControlName="name" name="name"  id="name">
+        <div *ngIf="submitted && createClientForm.controls.name.errors" class="form-control-feedback">
           <div *ngIf="createClientForm.controls.name.errors.required">Name is required</div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group"  [ngClass]="{ 'has-danger': submitted && createClientForm.controls.phone.errors }">
         <label for="phone">Phone</label>
-        <input type="text" class="form-control" formControlName="phone"  id="phone">
-        <div *ngIf="submitted && createClientForm.controls.phone.errors" class="error">
+        <input type="text" class="form-control" [pattern]="mobnumPattern" formControlName="phone" name="phone"  id="phone">
+        <div *ngIf="submitted && createClientForm.controls.phone.errors" class="form-control-feedback">
           <div *ngIf="createClientForm.controls.phone.errors.required">Phone is required</div>
+          <div *ngIf="createClientForm.controls.phone.errors.pattern">Invalid Phone!</div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{ 'has-danger': submitted && createClientForm.controls.email.errors }">
         <label for="email">Email</label>
-        <input type="email" class="form-control" formControlName="email" id="email">
-        <div *ngIf="submitted && createClientForm.controls.email.errors" class="error">
+        <input type="email" class="form-control" [pattern]="emailPattern" formControlName="email"  name="email" id="email">
+        <div *ngIf="submitted && createClientForm.controls.email.errors" class="form-control-feedback">
           <div *ngIf="createClientForm.controls.email.errors.required">Email is required</div>
+          <div *ngIf="createClientForm.controls.email.errors.pattern">Invalid Email!</div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{ 'has-danger': submitted && createClientForm.controls.company.errors }">
         <label for="company">Company</label>
-        <input type="text" class="form-control" formControlName="company" id="company">
-        <div *ngIf="submitted && createClientForm.controls.company.errors" class="error">
+        <input type="text" class="form-control" formControlName="company" name="company" id="company" >
+        <div *ngIf="submitted && createClientForm.controls.company.errors" class="form-control-feedback">
           <div *ngIf="createClientForm.controls.company.errors.required">Company is required</div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="zip">Zip</label>
-        <input type="text" [pattern]="mobnumPattern" class="form-control" name="zip"  formControlName="zip" id="name">
-        <div *ngIf="submitted && createClientForm.controls.zip.errors" class="error">
+      <div class="form-group" [ngClass]="{ 'has-danger': submitted && createClientForm.controls.zip.errors }">
+        <label for="zip">Zip </label>
+        <input type="number" [pattern]="zipPattern" class="form-control"  name="zip"  formControlName="zip" id="name" >
+        <div *ngIf="submitted && createClientForm.controls.zip.errors" class="form-control-feedback">
           <div *ngIf="createClientForm.controls.zip.errors.required">Zip is required</div>
-          <div *ngIf="createClientForm.controls.zip.errors.pattern">Zip is required</div>
+          <div *ngIf="createClientForm.controls.zip.errors.pattern">Invalid Zip</div>
         </div>
       </div>
       <button class="btn btn-primary">Create</button>
-      <div *ngIf="invalidLogin" class="error">
-        <div>Fill all data.</div>
+      <div *ngIf="invalidData" class="form-control-feedback">
+        <div>{{error_message}}</div>
       </div>
     </form>
   </div>

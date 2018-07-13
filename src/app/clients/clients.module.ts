@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'create-client', component: CreateClientComponent },
   { path: 'edit-client/:client_id', component: EditClientComponent },
   { path: 'list', component: ListComponent },
-  { path : '**', redirectTo: 'clients'}
+  { path : '**', redirectTo: 'list'}
 
 ];
 

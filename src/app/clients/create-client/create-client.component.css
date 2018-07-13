@@ -1,0 +1,6 @@
+.form-control-feedback{
+  color: #c00
+}
+.has-danger .form-control{
+  border-color: #c00
+}

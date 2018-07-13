@@ -50,7 +50,8 @@ export class EditClientComponent implements OnInit {
       phone:this.editClientForm.controls.phone.value,
       email:this.editClientForm.controls.email.value,
       company:this.editClientForm.controls.company.value,
-      zip:this.editClientForm.controls.zip.value
+      zip:this.editClientForm.controls.zip.value,
+      _id: this.client_data._id
     }
     this.appService.edit_client(obj).subscribe(response => {
     if (response.state === 'success') {

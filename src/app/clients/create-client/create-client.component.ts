@@ -12,8 +12,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 export class CreateClientComponent implements OnInit {
 createClientForm: FormGroup;
 submitted: boolean = false;
-invalidLogin: boolean = false;
+error_message: any;
+invalidData: boolean = false;
+emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
+  zipPattern="^[0-9]{6,6}$";
   constructor(private formBuilder: FormBuilder,private appService: AppService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -42,7 +45,8 @@ invalidLogin: boolean = false;
       this.router.navigate(['/clients/list']);
     }
     if (response.state === 'failure') {
-      this.invalidLogin = true;
+      this.invalidData = true;
+      this.error_message = response.message;
     }
   })
   }
