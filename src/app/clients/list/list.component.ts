@@ -10,6 +10,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListComponent implements OnInit {
 clients_list: any = [];
+client_data: any = {
+  name: '',
+  email: '',
+  phone: '',
+  company: '',
+  zip: ''
+};
   constructor(private appService: AppService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -22,6 +29,14 @@ clients_list: any = [];
           console.log(response);
         }
       })
+  }
+  onSubmit(){
+    this.appService.search_clients(this.client_data).subscribe(response => {
+      if(response){
+        this.clients_list = response.data;
+        console.log(response);
+      }
+    })
   }
 
 }

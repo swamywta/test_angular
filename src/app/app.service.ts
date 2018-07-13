@@ -22,12 +22,16 @@ export class AppService {
     return this.http.get('http://localhost:3000/clients/get_client_data/'+id)
       .pipe(map((res:Response) => res.json()));
   }
+  search_clients(data): Observable<any> {
+    return this.http.get('http://localhost:3000/clients/search_clients?name='+data.name+'&phone='+data.phone+'&email='+data.email+'&company='+data.company+'&zip='+data.zip)
+      .pipe(map((res:Response) => res.json()));
+  }
   create_client(data): Observable<any> {
     return this.http.post('http://localhost:3000/clients/create_client', data)
       .pipe(map((res:Response) => res.json()));
   }
   edit_client(data): Observable<any> {
-    return this.http.post('http://localhost:3000/clients/edit_client', data)
+    return this.http.put('http://localhost:3000/clients/edit_client', data)
       .pipe(map((res:Response) => res.json()));
   }
 }

@@ -2,17 +2,17 @@
 
   <div class="col-md-6 col-md-offset-2">
     <h1>Create Client </h1>
-    <form [formGroup]="createClientForm" (ngSubmit)="createClientForm.valid && onSubmit()">
+    <form [formGroup]="createClientForm" (ngSubmit)="createClientForm.valid && onSubmit()" novalidate>
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" formControlName="name" id="name">
+        <input type="text" class="form-control" formControlName="name"  id="name">
         <div *ngIf="submitted && createClientForm.controls.name.errors" class="error">
           <div *ngIf="createClientForm.controls.name.errors.required">Name is required</div>
         </div>
       </div>
       <div class="form-group">
         <label for="phone">Phone</label>
-        <input type="text" class="form-control" formControlName="phone" id="phone">
+        <input type="text" class="form-control" formControlName="phone"  id="phone">
         <div *ngIf="submitted && createClientForm.controls.phone.errors" class="error">
           <div *ngIf="createClientForm.controls.phone.errors.required">Phone is required</div>
         </div>
@@ -33,9 +33,10 @@
       </div>
       <div class="form-group">
         <label for="zip">Zip</label>
-        <input type="number" class="form-control" formControlName="zip" id="name">
+        <input type="text" [pattern]="mobnumPattern" class="form-control" name="zip"  formControlName="zip" id="name">
         <div *ngIf="submitted && createClientForm.controls.zip.errors" class="error">
           <div *ngIf="createClientForm.controls.zip.errors.required">Zip is required</div>
+          <div *ngIf="createClientForm.controls.zip.errors.pattern">Zip is required</div>
         </div>
       </div>
       <button class="btn btn-primary">Create</button>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService} from '../../app.service';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators, NgForm} from "@angular/forms";
 import { Router } from '@angular/router';
 import { ActivatedRouteSnapshot, ActivatedRoute, Resolve, RouterStateSnapshot } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,25 +17,30 @@ export class EditClientComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private appService: AppService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    // this.editClientForm = this.formBuilder.group({
-    //   name: ['', Validators.required],
-    //   phone: ['', Validators.required],
-    //   email: ['', Validators.required],
-    //   company: ['', Validators.required],
-    //   zip: ['', Validators.required],
-    // });
+    this.editClientForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', Validators.required],
+      company: ['', Validators.required],
+      zip: ['', Validators.required],
+    });
     this.get_client_data(this.route.snapshot.params['client_id']);
   }
   get_client_data(client_id){
     this.appService.get_client_data(client_id).subscribe(response => {
       if(response){
         this.client_data = response.data;
-        console.log(response);
+        this.editClientForm = this.formBuilder.group({
+          name: [this.client_data.name, Validators.required],
+          phone: [this.client_data.phone, Validators.required],
+          email: [this.client_data.email, Validators.required],
+          company: [this.client_data.company, Validators.required],
+          zip: [this.client_data.zip, Validators.required],
+        });
       }
     })
   }
   onSubmit() {
-    console.log(this.editClientForm);
     this.submitted = true;
     if (this.editClientForm.invalid) {
       return;
@@ -47,20 +52,9 @@ export class EditClientComponent implements OnInit {
       company:this.editClientForm.controls.company.value,
       zip:this.editClientForm.controls.zip.value
     }
-    // if(this.editClientForm.controls.email.value == 'dhiraj@gmail.com' && this.loginForm.controls.password.value == 'password') {
-    //     this.router.navigate(['list-user']);
-    // }else {
-    //   this.invalidLogin = true;
-    // }
     this.appService.edit_client(obj).subscribe(response => {
     if (response.state === 'success') {
-
-      // this.router.navigate(['/apps/crm/crm-edit-franchisee' + '/' + franchisee_Id]);
       this.router.navigate(['/clients/list']);
-      // this.create_flag = false;
-      // this.showfolderfile = false;
-      // this.folder_name = '';
-      // return this.get_folder_by_id(this.parent_id);
     }
     if (response.state === 'failure') {
       this.invalidLogin = true;
